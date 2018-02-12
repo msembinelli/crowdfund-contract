@@ -1,10 +1,11 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-const { interface, bytecode } = require('./compile');
-const YAML = require('yamljs');
+const yaml = require('yamljs');
 const fs = require('fs');
 
-config = YAML.load('config.yml');
+const compiledFactory = require('./build/CampaignFactory.json');
+
+config = yaml.load('config.yml');
 
 const provider = new HDWalletProvider(
     config.provider.mnemonic,
@@ -20,23 +21,22 @@ const deploy = async () => {
     console.log('Attempting to deploy from account', accounts[0]);
 
     // Use one of those accounts to deploy the contract
-    const result = await new web3.eth.Contract(JSON.parse(interface))
-        .deploy({ data: bytecode })
+    const result = await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
+        .deploy({ data: compiledFactory.bytecode })
         .send({ from: accounts[0], gas: '1000000' });
 
     var outputContract = {
         contract: {
-            abi: interface,
+            abi: compiledFactory.interface,
             address: result.options.address
         }
     };
 
-    fs.writeFile('contract.yml', YAML.stringify(outputContract, null, 2), function (err) {
+    fs.writeFile('contract.yml', yaml.stringify(outputContract, null, 2), function (err) {
         if (err) throw err;
         console.log('Output contract abi and address saved!');
         });
 
-    console.log(interface);
     console.log('Contract deployed to', result.options.address);
 };
 deploy();
