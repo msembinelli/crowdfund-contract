@@ -1,6 +1,19 @@
 pragma solidity ^0.4.17;
 
-contract Crowdfund {
+contract CampaignFactory {
+    address[] private deployedCampaigns;
+
+    function createCampaign(uint minimum) public {
+        address newCampaign = new Campaign(minimum, msg.sender);
+        deployedCampaigns.push(newCampaign);
+    }
+    
+    function getDeployedCampigns() public view returns (address[]) {
+        return deployedCampaigns;
+    }
+}
+
+contract Campaign {
     struct Request {
         string description;                  // Description of spending request
         uint value;                          // Amount of ether (wei)
@@ -22,8 +35,8 @@ contract Crowdfund {
         _;
     }
 
-    function Crowdfund(uint minimum) public {
-        manager = msg.sender;
+    function Campaign(uint minimum, address creator) public {
+        manager = creator;
         minimumContribution = minimum;
     }
     
@@ -62,6 +75,7 @@ contract Crowdfund {
         require(request.approvalCount > (approversCount / 2));
         
         request.recipient.transfer(request.value);
+        
         request.complete = true;
     }
 }

@@ -22,7 +22,7 @@ beforeEach(async () => {
     contract.setProvider(provider);
 });
 
-describe('Crowdfund', () => {
+describe('Campaign', () => {
     it('deploys a contract', () => {
         assert.ok(contract.options.address);
     });
