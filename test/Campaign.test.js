@@ -20,6 +20,7 @@ beforeEach(async () => {
     factory = await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
         .deploy({ data: compiledFactory.bytecode })
         .send({ from: accounts[0], gas: '1000000' });
+
     factory.setProvider(provider);
 
     await factory.methods.createCampaign('100').send({
@@ -28,6 +29,7 @@ beforeEach(async () => {
     });
 
     [campaignAddress] = await factory.methods.getDeployedCampaigns().call();
+
     campaign = await new web3.eth.Contract(
         JSON.parse(compiledCampaign.interface),
         campaignAddress
@@ -39,5 +41,10 @@ describe('Campaigns', () => {
     it('deploys a factory and a campaign', () => {
         assert.ok(campaign.options.address);
         assert.ok(factory.options.address);
+    });
+    
+    it('marks caller as the campaign manager', async () => {
+        const manager = await campaign.methods.manager().call();
+        assert.equal(accounts[0], manager)
     });
 });
