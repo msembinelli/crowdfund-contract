@@ -5,7 +5,8 @@
   "main": "index.js",
   "repository": "git@github.com:msembinelli/crowdfund-contract.git",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "next dev"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +14,9 @@
     "fs-extra": "^5.0.0",
     "ganache-cli": "^6.0.3",
     "mocha": "^5.0.0",
+    "next": "^4.1.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "solc": "^0.4.19",
     "truffle-hdwallet-provider": "0.0.3",
     "web3": "^1.0.0-beta.26",
