@@ -1,6 +1,7 @@
 # Project specific
 config.yml
 contract.yml
+build/
 
 # Logs
 logs
