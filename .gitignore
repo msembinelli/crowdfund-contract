@@ -1,5 +1,5 @@
 # Project specific
-config.yml
+config.json
 build/
 .next/
 

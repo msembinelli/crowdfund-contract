@@ -1,9 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const solc = require('solc');
-const yaml = require('yamljs');
-
-config = yaml.load('config.yml');
+const config = require('./config.json');
 
 const buildPath = path.resolve(__dirname, config.contracts.output);
 fs.removeSync(buildPath);

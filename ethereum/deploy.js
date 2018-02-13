@@ -1,10 +1,9 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-const yaml = require('yamljs');
 const path = require('path');
 const fs = require('fs-extra');
 
-const config = yaml.load('config.yml');
+const config = require('./config.json');
 
 const provider = new HDWalletProvider(
     config.provider.mnemonic,
