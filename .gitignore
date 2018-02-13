@@ -1,7 +1,7 @@
 # Project specific
 config.yml
-contract.yml
 build/
+.next/
 
 # Logs
 logs

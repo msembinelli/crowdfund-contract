@@ -1,16 +1,18 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const yaml = require('yamljs');
-const fs = require('fs');
+const path = require('path');
+const fs = require('fs-extra');
 
-const compiledFactory = require('./build/CampaignFactory.json');
-
-config = yaml.load('config.yml');
+const config = yaml.load('config.yml');
 
 const provider = new HDWalletProvider(
     config.provider.mnemonic,
     config.provider.url + config.provider.token
 );
+
+const compiledFactoryPath = './build/CampaignFactory.json';
+const compiledFactory = require('./build/CampaignFactory.json');
 
 const web3 = new Web3(provider);
 
@@ -25,17 +27,9 @@ const deploy = async () => {
         .deploy({ data: compiledFactory.bytecode })
         .send({ from: accounts[0], gas: '1000000' });
 
-    var outputContract = {
-        contract: {
-            abi: compiledFactory.interface,
-            address: result.options.address
-        }
-    };
-
-    fs.writeFile('contract.yml', yaml.stringify(outputContract, null, 2), function (err) {
-        if (err) throw err;
-        console.log('Output contract abi and address saved!');
-        });
+    var data = compiledFactory;
+    data['deploymentAddress'] = result.options.address;
+    fs.outputJsonSync(path.resolve(compiledFactoryPath), data);
 
     console.log('Contract deployed to', result.options.address);
 };
