@@ -4,7 +4,7 @@ import config from './config.json';
 let web3;
 
 // Test if we are running server side or browser side
-if (typeof window !== 'undefined' && window.web3 !== 'undefined') {
+if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // In browser and metamask is running
     web3 = new Web3(window.web3.currentProvider);
 } else {

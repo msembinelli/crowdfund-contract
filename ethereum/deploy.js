@@ -26,6 +26,7 @@ const deploy = async () => {
         .deploy({ data: compiledFactory.bytecode })
         .send({ from: accounts[0], gas: '1000000' });
 
+    // Add deploymentAddress to contract JSON file
     var data = compiledFactory;
     data['deploymentAddress'] = result.options.address;
     fs.outputJsonSync(path.resolve(compiledFactoryPath), data);
