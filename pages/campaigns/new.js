@@ -30,7 +30,7 @@ class CampaignNew extends Component {
             this.setState({ errorMessage: err.message });
         }
 
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, value: '' });
 
     };
 
