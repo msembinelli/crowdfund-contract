@@ -1,12 +1,12 @@
-# crowdfund-contract
+# Crowdfunding Contract Application
 A crowdfunding contract for Ethereum written in Solidity, providing democratic and transparent fund allocation.
 
-## Install
+## Install Node Modules
 `npm install`
 
 ## Compile Contracts
 First you must create a `config.json` file in the ethereum directory with the following structure:
-```
+```json
 {
 	"contracts": {
 		"input": "contracts",
@@ -16,18 +16,20 @@ First you must create a `config.json` file in the ethereum directory with the fo
 		]
 	},
 	"provider": {
-		"url": "https://rinkeby.infura.io/", // Provider service URL
-		"token": "1234567abcde",             // Provider API token
-		"mnemonic": "zoo leader seminar raven alien gain faculty wall age relief spot elegant"                             // 12 word metamask mnemonic
+		"url": "https://rinkeby.infura.io/",
+		"token": "1234567abcde",
+		"mnemonic": "zoo leader seminar raven alien gain faculty wall age relief spot elegant"
 	}
 }
 ```
+In this project I opted to use infura as my network provider via Web3.
+
 DO NOT commit the config.json file to github with your live mnemonic or API token. config.json has been added to .gitignore in this project.
 
 In the ethereum directory, run:
 `node compile.js`
 
-## Test
+## Run Mocha Tests
 Run the mocha tests against the smart contracts (on the Ganache local test network):
 `npm test`
 
@@ -39,5 +41,5 @@ Note down the output address that the contract has been deployed to. You can loo
 
 If you are not deploying from within the ethereum folder, the build output will be in the wrong location and the deploymentAddress property will not be added to CampaignFactory.json output. This will cause the application to throw a 'contract address not found' error.
 
-## Run the web application
+## Run The Web Application
 `npm start`
