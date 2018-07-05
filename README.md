@@ -8,18 +8,18 @@ A crowdfunding contract for Ethereum written in Solidity, providing democratic a
 First you must create a `config.json` file in the ethereum directory with the following structure:
 ```javascript
 {
-	"contracts": {
-		"input": "contracts",
-		"output": "build",
-		"files": [
-			"Campaign.sol"
-		]
-	},
-	"provider": {
-		"url": "https://rinkeby.infura.io/",
-		"token": "1234567abcde",
-		"mnemonic": "zoo leader seminar raven alien gain faculty wall age relief spot elegant"
-	}
+  "contracts": {
+    "input": "contracts",
+    "output": "build",
+    "files": [
+    "Campaign.sol"
+    ]
+  },
+  "provider": {
+    "url": "https://rinkeby.infura.io/",
+    "token": "1234567abcde",
+    "mnemonic": "zoo leader seminar raven alien gain faculty wall age relief spot elegant"
+  }
 }
 ```
 In this project I opted to use infura as my network provider via Web3.
