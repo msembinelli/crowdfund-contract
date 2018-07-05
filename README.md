@@ -6,7 +6,7 @@ A crowdfunding contract for Ethereum written in Solidity, providing democratic a
 
 ## Compile Contracts
 First you must create a `config.json` file in the ethereum directory with the following structure:
-```json
+```javascript
 {
 	"contracts": {
 		"input": "contracts",
